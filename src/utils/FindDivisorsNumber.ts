@@ -1,8 +1,4 @@
 export const findDivisorsNumber = (primeNumbers: number[]): number[] => {
-  const numberOneIndex = primeNumbers.findIndex(number => number === 1);
-
-  primeNumbers.splice(numberOneIndex, 1);
-
   const divisors = [1];
   let indexWhile = 0;
 
