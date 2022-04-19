@@ -52,4 +52,19 @@ describe('FindPrimeDivisors Controller', () => {
 
     expect(spyExecute).toHaveBeenCalledWith(45);
   });
+
+  it('should return 500 if FindPrimeDivisorsUseCase throws', async () => {
+    const { findPrimeDivisorsController, findPrimeDivisorsStub } = makeSut();
+
+    jest.spyOn(findPrimeDivisorsStub, 'execute').mockImplementationOnce(() => {
+      throw new Error();
+    });
+
+    const httpRequest = { body: { number: 45 } };
+
+    const httpResponse = findPrimeDivisorsController.handle(httpRequest);
+
+    expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual({ message: 'Internal server error' });
+  });
 });
