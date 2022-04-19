@@ -69,4 +69,16 @@ describe('FindDivisorsOfNumber UseCase', () => {
 
     expect(spyFindDivisorsOfNumber).toHaveBeenCalledWith([1, 3, 3, 5]);
   });
+
+  it('Should return the divisors of number on success', () => {
+    const { findDivisorsOfNumberUseCase } = makeSut();
+
+    const divisorsOfNumber = findDivisorsOfNumberUseCase.execute(45);
+
+    expect(divisorsOfNumber).toEqual({
+      entryNumber: 45,
+      divisorNumbers: [1, 3, 5, 9, 15, 45],
+      primeDivisors: [1, 3, 5],
+    });
+  });
 });
