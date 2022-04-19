@@ -1,10 +1,11 @@
-import { findDivisorsNumber } from './utils/FindDivisorsNumber';
-import { findPrimeDivisors } from './utils/FindPrimeDivisors';
+import { NumberDecomposer } from './utils/NumberDecomposer/implementations/FindDivisorsNumber';
+
+const numberDecomposer = new NumberDecomposer();
 
 export const run = (entryNumber: number) => {
-  const primeDivisors = findPrimeDivisors(entryNumber);
+  const primeDivisors = numberDecomposer.findPrimeDivisors(entryNumber);
 
-  const divisorsNumber = findDivisorsNumber(primeDivisors);
+  const divisorsNumber = numberDecomposer.findDivisorsOfNumber(primeDivisors);
 
   const removeDuplicate = [...new Set(primeDivisors)];
 
