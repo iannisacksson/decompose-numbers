@@ -3,7 +3,7 @@ import { IController } from '../protocols/controller';
 import { IHttpRequest, IHttpResponse } from '../protocols/http';
 
 export class FindPrimeDivisorsController implements IController {
-  constructor(private findPrimeDivisorsStub: IFindPrimeDivisorsUseCase) {}
+  constructor(private findPrimeDivisorsUseCase: IFindPrimeDivisorsUseCase) {}
 
   public handle(httpRequest: IHttpRequest): IHttpResponse {
     try {
@@ -13,7 +13,7 @@ export class FindPrimeDivisorsController implements IController {
 
       const { number } = httpRequest.body;
 
-      const primeDivisors = this.findPrimeDivisorsStub.execute(number);
+      const primeDivisors = this.findPrimeDivisorsUseCase.execute(number);
 
       return { statusCode: 200, body: primeDivisors };
     } catch (error) {
