@@ -13,9 +13,9 @@ export class FindPrimeDivisorsController implements IController {
 
       const { number } = httpRequest.body;
 
-      this.findPrimeDivisorsStub.execute(number);
+      const primeDivisors = this.findPrimeDivisorsStub.execute(number);
 
-      return null;
+      return { statusCode: 200, body: primeDivisors };
     } catch (error) {
       return { statusCode: 500, body: { message: 'Internal server error' } };
     }
