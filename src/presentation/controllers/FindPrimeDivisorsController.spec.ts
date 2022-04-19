@@ -67,4 +67,15 @@ describe('FindPrimeDivisors Controller', () => {
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual({ message: 'Internal server error' });
   });
+
+  it('Should return 200 if valid data is provided', () => {
+    const { findPrimeDivisorsController } = makeSut();
+
+    const httpRequest = { body: { number: 45 } };
+
+    const primeDivisors = findPrimeDivisorsController.handle(httpRequest);
+
+    expect(primeDivisors.statusCode).toBe(200);
+    expect(primeDivisors.body).toEqual({ primeDivisors: [1, 2, 3] });
+  });
 });
