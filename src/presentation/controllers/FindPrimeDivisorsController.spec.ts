@@ -1,4 +1,4 @@
-import { IPrimeDivisors } from '../../domain/models/IPrimeDivisors';
+import { IDivisorsNumber } from '../../domain/models/IDivisorsNumber';
 import { IFindPrimeDivisorsUseCase } from '../../domain/useCases/IFindPrimeDivisorsUseCase';
 import { FindPrimeDivisorsController } from './FindPrimeDivisorsController';
 
@@ -9,8 +9,12 @@ interface ISut {
 
 const makeFindPrimeDivisors = (): IFindPrimeDivisorsUseCase => {
   class FindPrimeDivisorsStub implements IFindPrimeDivisorsUseCase {
-    public execute(): IPrimeDivisors {
-      return { primeDivisors: [1, 2, 3] };
+    public execute(): IDivisorsNumber {
+      return {
+        entryNumber: 45,
+        divisorNumbers: [1, 3, 5, 9, 15, 45],
+        primeDivisors: [1, 3, 5],
+      };
     }
   }
 
@@ -76,6 +80,10 @@ describe('FindPrimeDivisors Controller', () => {
     const primeDivisors = findPrimeDivisorsController.handle(httpRequest);
 
     expect(primeDivisors.statusCode).toBe(200);
-    expect(primeDivisors.body).toEqual({ primeDivisors: [1, 2, 3] });
+    expect(primeDivisors.body).toEqual({
+      entryNumber: 45,
+      divisorNumbers: [1, 3, 5, 9, 15, 45],
+      primeDivisors: [1, 3, 5],
+    });
   });
 });

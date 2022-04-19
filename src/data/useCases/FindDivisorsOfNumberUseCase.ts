@@ -1,4 +1,4 @@
-import { IPrimeDivisors } from '../../domain/models/IPrimeDivisors';
+import { IDivisorsNumber } from '../../domain/models/IDivisorsNumber';
 import { IFindPrimeDivisorsUseCase } from '../../domain/useCases/IFindPrimeDivisorsUseCase';
 import { IFindDivisorsOfNumber } from '../../utils/NumberDecomposer/protocols/IFindDivisorsOfNumber';
 import { IFindPrimeDivisors } from '../../utils/NumberDecomposer/protocols/IFindPrimeDivisors';
@@ -9,11 +9,18 @@ export class FindDivisorsOfNumberUseCase implements IFindPrimeDivisorsUseCase {
     private findDivisorsOfNumber: IFindDivisorsOfNumber,
   ) {}
 
-  public execute(value: number): IPrimeDivisors {
+  public execute(value: number): IDivisorsNumber {
     const primeDivisors = this.findPrimeDivisors.findPrimeDivisors(value);
 
-    this.findDivisorsOfNumber.findDivisorsOfNumber(primeDivisors);
+    const divisorNumbers =
+      this.findDivisorsOfNumber.findDivisorsOfNumber(primeDivisors);
 
-    return null;
+    const removeDuplicate = [...new Set(primeDivisors)];
+
+    return {
+      entryNumber: value,
+      divisorNumbers,
+      primeDivisors: removeDuplicate,
+    };
   }
 }

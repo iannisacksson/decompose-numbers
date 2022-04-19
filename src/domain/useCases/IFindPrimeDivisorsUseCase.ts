@@ -1,5 +1,5 @@
-import { IPrimeDivisors } from '../models/IPrimeDivisors';
+import { IDivisorsNumber } from '../models/IDivisorsNumber';
 
 export interface IFindPrimeDivisorsUseCase {
-  execute(value: number): IPrimeDivisors;
+  execute(value: number): IDivisorsNumber;
 }
